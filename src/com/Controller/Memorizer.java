@@ -2,6 +2,7 @@ package com.Controller;
 
 import java.util.ArrayList;
 
+import com.Controller.Complexity.Size.KeywordComplexity;
 import com.Model.Complexity;
 
 public class Memorizer {
@@ -25,7 +26,20 @@ public class Memorizer {
 	}
 
 	private void memorizeNesting(String line) {
+		KeywordComplexity complexity = new KeywordComplexity(line, new String[] {"if", "for", "while", "switch", "else"});
 		
+		if(complexity.GetComplexity().getKeywordList().size()==1) {
+			nestingLevel.add(complexity.GetComplexity().getKeywords());
+		}
+		
+		complexity = new KeywordComplexity(line, new String[] {"}"});
+		
+		Complexity com = complexity.GetComplexity();
+		
+		for(int i=0; i<com.getKeywordList().size(); i++) {
+			if(nestingLevel.size()!=0)
+				nestingLevel.remove(nestingLevel.size()-1);
+		}
 	}
 
 	public void checkNextRecusion(ArrayList<String> lines, int line) {
@@ -33,9 +47,7 @@ public class Memorizer {
 	}
 
 	public Complexity GetNestingComplexity() {
-		Complexity complexity = new Complexity();
-		
-		return complexity;
+		return new Complexity(nestingLevel.size(),nestingLevel);
 	}
 	
 	public Complexity GetInheritanceComplexity() {

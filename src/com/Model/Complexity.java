@@ -1,16 +1,19 @@
 package com.Model;
 
+import java.util.ArrayList;
+
 public class Complexity {
 
 	private int score;
-	private String keywords;
+	private ArrayList<String> keywords;
+	private String keys = "";
 
 	public Complexity() {
 		score = 0;
-		keywords = "";
+		keywords = new ArrayList<String>();
 	}
 
-	public Complexity(int score, String keywords) {
+	public Complexity(int score, ArrayList<String> keywords) {
 		this.score = score;
 		this.keywords = keywords;
 	}
@@ -20,11 +23,7 @@ public class Complexity {
 	}
 	
 	public void addKeyword(String keyword) {
-		if(keywords == "") {
-			keywords = keyword;
-		}else {
-			keywords += ", " + keyword;
-		}
+		keywords.add(keyword);
 	}
 
 	public int getScore() {
@@ -32,6 +31,18 @@ public class Complexity {
 	}
 
 	public String getKeywords() {
+		keys = "";
+		keywords.forEach(keyword -> {
+			if(keys == "") {
+				keys = keyword;
+			}else {
+				keys += ", " + keyword;
+			}
+		});
+		return keys;
+	}
+	
+	public ArrayList<String> getKeywordList(){
 		return keywords;
 	}
 

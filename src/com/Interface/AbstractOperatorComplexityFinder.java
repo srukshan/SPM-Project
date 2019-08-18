@@ -16,7 +16,7 @@ public abstract class AbstractOperatorComplexityFinder extends AbstractComplexit
 		Complexity complexity = new Complexity();
 		
 		for (String operator : operators) {
-			for(int i = 0; i < line.length()-operator.length(); i++) {
+			for(int i = 0; i < line.length()-operator.length()+1; i++) {
 				if(line.substring(i, i+operator.length()).equals(operator)) {
 					complexity.addKeyword(operator);
 					complexity.increaseScore(1);

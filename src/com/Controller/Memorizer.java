@@ -24,11 +24,29 @@ public class Memorizer {
 	private void memorizeInheritance(String line) {
 		KeywordComplexity keywordComplexity = new KeywordComplexity(line, new String[] {"class", "extends", "implements"});
 		
+		if(keywordComplexity.GetComplexity().getKeywordList().size()==1) {
+			inheritanceLevel.add(keywordComplexity.GetComplexity().getKeywords());
+		}
+		
 		ArrayList<String> keywords = keywordComplexity.GetComplexity().getKeywordList();
 		
-		int start, end, counter = -1;
+		int start = -1, end = -1, counter = 0;
 		
 		for(int i = 0; i < line.length(); ++i) {
+			if(line.charAt(i) == '{') {
+				counter++;
+				if(start == -1)
+					start = 1;
+			}
+			if(line.charAt(i) == '}') {
+				counter--;
+				if(counter == 0)
+					end = 1;
+			}
+			
+			if(end == 1 && start == 1) {
+				
+			}
 			
 		}
 	}
@@ -59,9 +77,7 @@ public class Memorizer {
 	}
 	
 	public Complexity GetInheritanceComplexity() {
-		Complexity complexity = new Complexity();
-		
-		return complexity;
+		return new Complexity(inheritanceLevel.size(),inheritanceLevel);
 	}
 	
 	public Complexity GetRecursionComplexity() {

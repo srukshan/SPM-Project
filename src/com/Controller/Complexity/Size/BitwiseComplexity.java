@@ -9,6 +9,11 @@ public class BitwiseComplexity extends AbstractComplexityFinder {
 		super(line);
 		operators = new String[] { "|", "^", "~", "<<", ">>", "<<<", ">>>" };
 	}
+	
+	public BitwiseComplexity(String line, String[] operators) {
+		super(line);
+		this.operators = operators;
+	}
 
 	@Override
 	public Complexity GetComplexity() {

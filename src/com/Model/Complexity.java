@@ -34,5 +34,10 @@ public class Complexity {
 	public String getKeywords() {
 		return keywords;
 	}
+
+	public void merge(Complexity complexity) {
+		addKeyword(complexity.getKeywords());
+		increaseScore(complexity.getScore());
+	}
 	
 }

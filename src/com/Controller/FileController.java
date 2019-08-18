@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import com.Model.File;
 
@@ -14,7 +15,7 @@ public class FileController {
 		File file = new File(fileName);
 
 		try {
-			file.SetLines(Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8).iterator());
+			file.SetLines(new ArrayList<String>(Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8)));
 		} catch (IOException e) {
 			// do something
 			e.printStackTrace();

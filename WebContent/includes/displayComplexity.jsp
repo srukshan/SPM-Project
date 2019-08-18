@@ -1,3 +1,5 @@
+<%@page import="com.Model.Complexity"%>
+<%@page import="com.Controller.Complexity.SizeComplexity"%>
 <%@page import="com.sun.org.apache.xpath.internal.compiler.Keywords"%>
 <%@page import="com.Controller.*"%>
 <%@page import="java.util.List"%>
@@ -58,8 +60,9 @@
 		while (itr.hasNext()) {
 			j++;
 			String a = itr.next();
-
-			line = a.replace("(", " ");
+			Complexity sizeComplexity = new SizeComplexity(a).GetComplexity();
+			
+/* 			line = a.replace("(", " ");
 			line = line.replace(")", " ");
 			line = line.replace(";", " ");
 			int Cs = 0;
@@ -113,7 +116,7 @@
 						Cs++;
 					}
 				}
-			} */
+			} 
 
 			for (i = 0; i < roSize; i++) {
 				int x = 0;
@@ -164,24 +167,25 @@
 						Cs++;
 					}
 				}
-			}
+			} */
+			
 	%>
 
 		<tr>
 			<td><%=j%></td>
 			<td><%=a%></td>
-			<td><%=KeyWords%></td>
+			<td><%=sizeComplexity.getKeywords()%></td>
 			<%
-				TW= Ctc +Cnc +Ci;
-				Cps = Cs * TW;
+				//TW= Ctc +Cnc +Ci;
+				//Cps = Cs * TW;
 			%>
-			<td><%=Cs%></td>
-			<td><%=Ctc%></td>
+			<td><%=sizeComplexity.getScore()%></td>
+			<%-- <td><%=Ctc%></td>
 			<td><%=Cnc%></td>
 			<td><%=Ci%></td>
 			<td><%=TW%></td>
 			<td><%=Cps%></td>
-			<td><%=Cr%></td>
+			<td><%=Cr%></td> --%>
 			
 		</tr>
 	<% } %>

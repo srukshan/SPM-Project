@@ -7,14 +7,14 @@ import org.junit.Test;
 import com.Interface.ComplexityFinder;
 import com.Model.Complexity;
 
-public class ArithmeticComplexityTest {
+public class VariableComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new ArithmeticComplexity("   if(a+b==4&&d-c==2){");
+		ComplexityFinder complexityFinder = new VariableComplexity("   if(a+b==\"hello\"&&d-c==2){");
 		Complexity complexity = complexityFinder.GetComplexity();
-		assertEquals("+, -", complexity.getKeywords());
-		assertEquals(2, complexity.getScore());
+		assertEquals("a, b, d, c", complexity.getKeywords());
+		assertEquals(4, complexity.getScore());
 	}
 
 }

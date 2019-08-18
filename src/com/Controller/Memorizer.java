@@ -22,7 +22,15 @@ public class Memorizer {
 	}
 	
 	private void memorizeInheritance(String line) {
+		KeywordComplexity keywordComplexity = new KeywordComplexity(line, new String[] {"class", "extends", "implements"});
 		
+		ArrayList<String> keywords = keywordComplexity.GetComplexity().getKeywordList();
+		
+		int start, end, counter = -1;
+		
+		for(int i = 0; i < line.length(); ++i) {
+			
+		}
 	}
 
 	private void memorizeNesting(String line) {

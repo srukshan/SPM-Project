@@ -24,7 +24,8 @@ public class BitwiseComplexity extends AbstractComplexityFinder {
 				String beforeOperator = i-operator.length()>=0?
 						line.substring(i-operator.length(),i):"";
 				String atOperator = line.substring(i, i+operator.length());
-				if(!beforeOperator.equals(operator)&&atOperator.equals(operator)) {
+				String afterOperator = line.substring(i+1, i+operator.length()+1);
+				if(!beforeOperator.equals(operator)&&atOperator.equals(operator)&&!afterOperator.equals(operator)) {
 					complexity.addKeyword(operator);
 					complexity.increaseScore(1);
 				}

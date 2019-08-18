@@ -47,7 +47,7 @@ public class Complexity {
 	}
 
 	public void merge(Complexity complexity) {
-		addKeyword(complexity.getKeywords());
+		keywords.addAll(complexity.getKeywordList());
 		increaseScore(complexity.getScore());
 	}
 	

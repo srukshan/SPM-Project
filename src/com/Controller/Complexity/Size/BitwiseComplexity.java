@@ -4,33 +4,60 @@ import com.Interface.AbstractComplexityFinder;
 import com.Model.Complexity;
 
 public class BitwiseComplexity extends AbstractComplexityFinder {
-	String[] operators;
+	
 	public BitwiseComplexity(String line) {
 		super(line);
-		operators = new String[] { "|", "^", "~", "<<", ">>", "<<<", ">>>" };
-	}
-	
-	public BitwiseComplexity(String line, String[] operators) {
-		super(line);
-		this.operators = operators;
+		removeDoubleQuotedString();
+		wordList = new String[] { "|", "^", "~", "<<", ">>", "<<<", ">>>" };
 	}
 
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
 		
-		for (String operator : operators) {
-			for(int i = 0; i < line.length()-operator.length(); i++) {
-				String beforeOperator = i-operator.length()>=0?
-						line.substring(i-operator.length(),i):"";
-				String atOperator = line.substring(i, i+operator.length());
-				String afterOperator = line.substring(i+1, i+operator.length()+1);
-				if(!beforeOperator.equals(operator)&&atOperator.equals(operator)&&!afterOperator.equals(operator)) {
-					complexity.addKeyword(operator);
-					complexity.addScore(1);
+		for (String operator : wordList) {
+			
+			for(int i = 0; i < line.length() - operator.length() + 1; i++) {
+				
+				if(line.substring(i, i + operator.length()).equals(operator)) {
+					if(operator.equals("|")) {
+						if(i == 0) {
+							if(line.charAt(i + 1) != '|') {
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+						else if(i >= 1) {
+							if(line.charAt(i + 1) != '|' && line.charAt(i - 1) != '|') {
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+					}
+					else if(operator.equals(">") || operator.equals("<")){
+						if(i == 0) {
+							if(line.charAt(i + 1) != '<' && line.charAt(i + 1) != '>') {
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+						else if(i >= 1) {
+							if(line.charAt(i + 1) != '>' && line.charAt(i + 1) != '<' &&
+									line.charAt(i - 1) != '>' && line.charAt(i - 1) != '<') {
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+					}
+					else {
+						complexity.addKeyword(operator);
+						complexity.addScore(1);
+					}
+					
 				}
 			}
 		}
+		
 		return complexity;
 	}
 }

@@ -10,7 +10,7 @@ public class BitwiseComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new BitwiseComplexity("   if(a<<b==4&&d|c==2){");
+		ComplexityFinder complexityFinder = new BitwiseComplexity("   if(a<<b==4 &&d |c==2){");
 		Complexity complexity = complexityFinder.GetComplexity();
 		assertEquals("|, <<", complexity.keywordsToString());
 		assertEquals(2, complexity.getScore());

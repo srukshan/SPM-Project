@@ -17,7 +17,9 @@ public class NumericComplexity extends AbstractComplexityFinder {
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		
 		int start = -1;
+		
 		for(int i = 0; i < line.length(); i++) {
 			if(line.charAt(i)=='"') {
 				if(start==-1)
@@ -28,6 +30,7 @@ public class NumericComplexity extends AbstractComplexityFinder {
 				}
 			}
 		}
+		
 		ArrayList<String> numbers = new ArrayList<String>(Arrays.asList(Pattern.compile("\\b\\d+(?:\\.\\d+)?\\b")
 				.matcher(line)
 				.results()

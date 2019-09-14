@@ -11,7 +11,7 @@ public class ManipulatorComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new ManipulatorComplexity("   if(a+b==4&&d-c==2){\n");
+		ComplexityFinder complexityFinder = new ManipulatorComplexity("   if(a+b==4&&d-c==2){\\n");
 		Complexity complexity = complexityFinder.GetComplexity();
 		assertEquals("\\n", complexity.keywordsToString());
 		assertEquals(1, complexity.getScore());

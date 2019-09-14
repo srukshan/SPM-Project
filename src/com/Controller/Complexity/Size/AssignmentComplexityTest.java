@@ -13,7 +13,7 @@ public class AssignmentComplexityTest {
 	public void testGetComplexity() {
 		ComplexityFinder complexityFinder = new AssignmentComplexity("   n=20;n+=5;");
 		Complexity complexity = complexityFinder.GetComplexity();
-		assertEquals("=, +=", complexity.keywordsToString());
+		assertEquals("+=, =", complexity.keywordsToString());
 		assertEquals(2, complexity.getScore());
 	}
 

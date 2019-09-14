@@ -1,11 +1,55 @@
 package com.Controller.Complexity.Size;
 
-public class AssignmentComplexity extends BitwiseComplexity {
+import com.Interface.AbstractComplexityFinder;
+import com.Model.Complexity;
+
+public class AssignmentComplexity extends AbstractComplexityFinder {
 	
 	public AssignmentComplexity(String line) {
 		super(line);
-		operators = new String[] { "+=", "-=", "*=", "=", "/=", ">>>=", "|=", "&=", "<<=", ">>=", "%=",
+		removeDoubleQuotedString();
+		wordList = new String[] { "+=", "-=", "*=", "=", "/=", ">>>=", "|=", "&=", "<<=", ">>=", "%=",
 				"^=" };
+	}
+
+	@Override
+	public Complexity GetComplexity() {
+		Complexity complexity = new Complexity();
+		
+		for (String operator : wordList) {
+			
+			for(int i = 0; i < line.length() - operator.length() + 1; ++i) {
+				
+				if(line.substring(i, i + operator.length()).equals(operator)) {
+					
+					if(operator.equals("=")) {
+						if(i == 0) {
+							if(line.charAt(i + 1) != '=') {
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+						else if(i >= 1) {
+							if(line.charAt(i - 1) != '=' && line.charAt(i + 1) != '=' &&
+									line.charAt(i - 1) != '+' && line.charAt(i - 1) != '*' &&
+									line.charAt(i - 1) != '/' && line.charAt(i - 1) != '-' &&
+									line.charAt(i - 1) != '|' && line.charAt(i - 1) != '>' &&
+									line.charAt(i - 1) != '<' && line.charAt(i - 1) != '^') 
+							{
+								complexity.addKeyword(operator);
+								complexity.addScore(1);
+							}
+						}
+					}
+					else if(!operator.equals("=")) {
+						complexity.addKeyword(operator);
+						complexity.addScore(1);
+					}					
+				}
+			}
+		}
+		
+		return complexity;
 	}
 
 }

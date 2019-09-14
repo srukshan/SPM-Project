@@ -11,10 +11,10 @@ public class VariableComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new VariableComplexity("   if(a+b==\"hello\"&&d-c==2){");
+		ComplexityFinder complexityFinder = new VariableComplexity("   if(a+b==\"hello\"&&d-c==2){ int cars = 5;");
 		Complexity complexity = complexityFinder.GetComplexity();
-		assertEquals("a, b, d, c", complexity.keywordsToString());
-		assertEquals(4, complexity.getScore());
+		assertEquals("a, b, d, c, cars", complexity.keywordsToString());
+		assertEquals(5, complexity.getScore());
 	}
 
 }

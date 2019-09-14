@@ -7,70 +7,23 @@ import java.util.regex.Pattern;
 
 import com.Interface.AbstractComplexityFinder;
 import com.Model.Complexity;
+import com.Model.GlobleVariables;
 
 public class VariableComplexity extends AbstractComplexityFinder {
 
-	ArrayList<String> keywords = new ArrayList<String>(Arrays.asList(new String[] {
-			"abstract"
-			, "continue"
-			, "for"
-			, "new"
-			, "switch" 
-			, "assert"
-			, "default"
-			, "goto"
-			, "package"
-			, "synchronized" 
-			, "boolean"
-			, "do"
-			, "if"
-			, "private"
-			, "this" 
-			, "break"
-			, "double"
-			, "implements"
-			, "protected"
-			, "throw"
-			, "byte"
-			, "else"
-			, "import"
-			, "public"
-			, "throws" 
-			, "case"
-			, "enum"
-			, "instanceof"
-			, "return"
-			, "transient"
-			, "catch"
-			, "extends"
-			, "int"
-			, "short"
-			, "try"
-			, "char"
-			, "final"
-			, "interface"
-			, "static"
-			, "void"
-			, "class"
-			, "finally"
-			, "long"
-			, "strictfp"
-			, "volatile"
-			, "const"
-			, "float"
-			, "native"
-			, "super"
-			, "while"
-	}));
+	ArrayList<String> keywords = new ArrayList<String>(Arrays.asList(GlobleVariables.keywordList));
 
 	public VariableComplexity(String line) {
 		super(line);
+		removeDoubleQuotedString();
 	}
 
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		
 		int start = -1;
+		
 		for(int i = 0; i < line.length(); i++) {
 			if(line.charAt(i)=='"') {
 				if(start==-1)
@@ -81,6 +34,7 @@ public class VariableComplexity extends AbstractComplexityFinder {
 				}
 			}
 		}
+		
 		ArrayList<String> variables = new ArrayList<String>(Arrays.asList(Pattern.compile("[a-zA-Z$_][a-zA-Z$_0-9]*")
 				.matcher(line)
 				.results()

@@ -11,7 +11,7 @@ public class TextComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new TextComplexity("   if(a+b==\"hello\"&&d-c==2){");
+		ComplexityFinder complexityFinder = new TextComplexity("   if(a+b==\"hello\" && d-c==2){");
 		Complexity complexity = complexityFinder.GetComplexity();
 		assertEquals("\"hello\"", complexity.keywordsToString());
 		assertEquals(1, complexity.getScore());

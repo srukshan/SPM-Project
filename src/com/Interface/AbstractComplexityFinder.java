@@ -1,5 +1,6 @@
 package com.Interface;
 
+import java.util.ArrayList;
 import java.util.regex.MatchResult;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -59,6 +60,13 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 		return variable;
 	}
 	
+	public boolean isNumber(String text) {
+		Pattern pattern = Pattern.compile("[0-9.]*$");
+		Matcher matcher = pattern.matcher(text);		
+		
+		return matcher.find();
+	}
+	
 	public boolean isDataType(String text) {
 		Pattern pattern = Pattern.compile("[a-zA-Z$_][a-zA-Z$_0-9]*");
 		Matcher matcher = pattern.matcher(text);
@@ -82,6 +90,26 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 				.results()
 				.map(MatchResult::group)
 				.toArray(String[]::new);
+	}
+	
+	public String[] splitLine() {
+		ArrayList<String> temp = new ArrayList<>();
+		
+		for(String item: line.split(" ")) {
+			if(!item.isBlank()) temp.add(item);
+		}
+		
+		return temp.toArray(new String[temp.size()]);
+	}
+	
+	public String[] splitLine(String text) {
+		ArrayList<String> temp = new ArrayList<>();
+		
+		for(String item: text.split(" ")) {
+			if(!item.isBlank()) temp.add(item);
+		}
+		
+		return temp.toArray(new String[temp.size()]);
 	}
 
 }

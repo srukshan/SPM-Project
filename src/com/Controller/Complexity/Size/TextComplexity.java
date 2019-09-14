@@ -12,9 +12,11 @@ public class TextComplexity extends AbstractComplexityFinder {
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		
 		int start = -1;
+		
 		for(int i = 0; i < line.length(); i++) {
-			if(line.charAt(i)=='"') {
+			if(line.charAt(i) == '"') {
 				if(start==-1)
 					start=i;
 				else {

@@ -11,10 +11,10 @@ public class KeywordComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new KeywordComplexity("   if(a+b==4&&d-c==2){");
+		ComplexityFinder complexityFinder = new KeywordComplexity("   public static void main(String[] Args)");
 		Complexity complexity = complexityFinder.GetComplexity();
-		assertEquals("if", complexity.keywordsToString());
-		assertEquals(1, complexity.getScore());
+		assertEquals("void, String", complexity.keywordsToString());
+		assertEquals(2, complexity.getScore());
 	}
 
 }

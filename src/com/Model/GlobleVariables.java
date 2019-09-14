@@ -72,6 +72,7 @@ public class GlobleVariables {
 			"requires", 
 			"return", 
 			"short", 
+			"String", 
 			"signed", 
 			"sizeof", 
 			"static", 

@@ -16,5 +16,4 @@ public class MiscellaneousComplexityTest {
 		assertEquals("->, ::", complexity.keywordsToString());
 		assertEquals(2, complexity.getScore());
 	}
-
 }

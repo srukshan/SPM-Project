@@ -1,12 +1,18 @@
 package com.Controller.Complexity.TypeOf;
 
-import com.Interface.AbstractOperatorComplexityFinder;
+import com.Interface.AbstractComplexityFinder;
+import com.Model.Complexity;
 
-public class CatchComplexity extends AbstractOperatorComplexityFinder{
+public class CatchComplexity extends AbstractComplexityFinder{
 
 	public CatchComplexity(String line) {
 		super(line);
-		operators = new String[] {"catch"};
+	}
+
+	@Override
+	public Complexity GetComplexity() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

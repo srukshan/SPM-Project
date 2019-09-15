@@ -6,15 +6,15 @@ import com.Model.CodeFile;
 import com.Model.Line;
 
 public class CommentController {
-	private CodeFile file;
+	private ArrayList<Line> file;
 	
-	public CommentController(CodeFile file) {
+	public CommentController(ArrayList<Line> file) {
 		this.file = file;
 	}
 	
 	public void RemoveComments() {
 		boolean cmt = false;
-		ArrayList<Line> oldContent = file.getLines();
+		ArrayList<Line> oldContent = new ArrayList<Line>(file);
 		ArrayList<Line> newContent = new ArrayList<Line>();
 		
 		for(Line line: oldContent) {
@@ -47,10 +47,10 @@ public class CommentController {
 				newContent.add(line);
 			}
 		}
-		file.setLines(newContent);
+		file = newContent;
 	}
 	
-	public CodeFile GetCodeFile() {
+	public ArrayList<Line> GetCodeFile() {
 		return file;
 	}
 }

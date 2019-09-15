@@ -62,19 +62,20 @@ public class Block {
 		}
 	}
 	
-	public void endBlock(int line) {
+	public Block endBlock(int line) {
 		if(!isComplete()) {
 			if(isChildernComplete()) {
 				this.end = line;
+				return this;
 			}else {
 				for (Block child : children) {
 					if(!child.isComplete()) {
-						child.endBlock(line);
-						break;
+						return child.endBlock(line);
 					}
 				}
 			}
 		}
+		return null;
 	}
 	
 	public void addChild(Block child) {
@@ -95,4 +96,16 @@ public class Block {
 		}else
 			return null;
 	}
+
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("{type:"+type+", children: {");
+		for (Block block : children) {
+			str.append(block.toString()+",");
+		}
+		str.append("}");
+		return str.toString();
+	}
+	
+	
 }

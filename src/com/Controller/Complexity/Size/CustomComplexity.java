@@ -14,7 +14,14 @@ public class CustomComplexity extends AbstractComplexityFinder {
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
 		
-		
+		for (String word : wordList) {
+			for(int i = 0; i < line.length()-word.length()+1; i++) {
+				if(line.substring(i, i+word.length()).equals(word)) {
+					complexity.addKeyword(word);
+					complexity.addScore(1);
+				}
+			}
+		}
 		return complexity;
 	}
 	

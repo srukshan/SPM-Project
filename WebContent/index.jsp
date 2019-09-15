@@ -1,25 +1,3 @@
-<%
-	/* response.setHeader("Cache-Control", "no-cache"); //Forces caches to obtain a new copy of the page from the origin server
-	response.setHeader("Cache-Control", "no-store"); //Directs caches not to store the page under any circumstance
-	//response.setDateHeader("Expires", 0); //Causes the proxy cache to see the page as "stale"
-	
-	int timeout = session.getMaxInactiveInterval();
-	response.setHeader("Refresh", timeout + "; URL = index.jsp");
-	response.setHeader("Pragma", "no-cache"); //HTTP 1.0 backward compatibility
-	
-	session.invalidate();
-	
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort()
-			+ path + "/";
-	
-	System.out.println("Basepath:- "+ basePath);
-	System.out.println(System.getProperty("java.version"));
-	
-	String errCode = "" + request.getParameter("err");
-	String message = "" + request.getParameter("msg"); */
-%>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,17 +17,13 @@
 	<link rel="stylesheet" href="plugins/uniform/css/uniform.default.css"
 		media="screen">
 	
-	<!-- Plugin Stylsheets first to ease overrides -->
-	
-	<!-- End Plugin Stylesheets -->
-	
 	<!-- Main Layout Stylesheet -->
 	<link rel="stylesheet" href="assets/css/fonts/icomoon/style.css"
 		media="screen">
 	<link rel="stylesheet" href="assets/css/login.css" media="screen">
 	<link rel="stylesheet" href="plugins/zocial/zocial.css" media="screen">
 	
-	<title>SoftlogicLife - Login</title>
+	<title>Code Review Tool - Initialize</title>
 </head>
 <body>
 	<div id="login-wrap">

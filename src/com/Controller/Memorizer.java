@@ -87,11 +87,11 @@ public class Memorizer {
 	private void memorizeInheritance(String line) {
 		KeywordComplexity keywordComplexity = new KeywordComplexity(line, new String[] {"class", "extends", "implements"});
 		
-		if(keywordComplexity.GetComplexity().getKeywordList().size()==1) {
+		if(keywordComplexity.GetComplexity().getKeywords().size()==1) {
 			inheritanceLevel.add(keywordComplexity.GetComplexity().keywordsToString());
 		}
 		
-		ArrayList<String> keywords = keywordComplexity.GetComplexity().getKeywordList();
+		ArrayList<String> keywords = keywordComplexity.GetComplexity().getKeywords();
 		
 		int start = -1, end = -1, counter = 0;
 		
@@ -117,7 +117,7 @@ public class Memorizer {
 	private void memorizeNesting(String line) {
 		KeywordComplexity complexity = new KeywordComplexity(line, new String[] {"if", "for", "while", "switch", "else"});
 		
-		if(complexity.GetComplexity().getKeywordList().size()==1) {
+		if(complexity.GetComplexity().getKeywords().size()==1) {
 			nestingLevel.add(complexity.GetComplexity().keywordsToString());
 		}
 		
@@ -125,7 +125,7 @@ public class Memorizer {
 		
 		Complexity com = complexity.GetComplexity();
 		
-		for(int i=0; i<com.getKeywordList().size(); i++) {
+		for(int i=0; i<com.getKeywords().size(); i++) {
 			if(nestingLevel.size()!=0)
 				nestingLevel.remove(nestingLevel.size()-1);
 		}

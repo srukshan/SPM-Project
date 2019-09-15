@@ -32,9 +32,8 @@ public class FileController {
 			e.printStackTrace();
 		}
 		
-		/*for(Line item: codeFile.getLines()) {
-			System.out.println(item.getLineIndex() +" -> \""+ item.getLineContent() +"\"");
-		}*/
+		CommentController commentController = new CommentController(codeFile);
+		commentController.RemoveComments();
 		
 		return codeFile;
 	}

@@ -114,6 +114,12 @@ public class KeywordComplexity extends AbstractComplexityFinder {
 				"super", 
 				"transient" };
 	}
+	
+	public KeywordComplexity(String line, String[] wordList) {
+		super(line);
+		removeDoubleQuotedString();
+		this.wordList = wordList;
+	}
 
 	@Override
 	public Complexity GetComplexity() {

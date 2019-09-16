@@ -9,15 +9,12 @@
 <%@page import="java.util.*"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="com.Model.CodeFile"%>
+<%@page import="com.Model.Line"%>
 
 <%
-	int lineCount = 0;
-	String file_Dir = request.getParameter("fileOne");
 	
-	CodeFile file = FileController.ReadFileInList(file_Dir);
-	Iterator<String> itr = file.GetLineIterator();
-	
-	Memorizer memorizer = new Memorizer();
+	FileController.startAnalyzing();
+
 %>
 
 <table border=1 width=100%>
@@ -35,33 +32,30 @@
 	</tr>
 	
 	<%
-		while (itr.hasNext()) {
-			lineCount++;
+		for(CodeFile file: FileController.GetFileList()) {
 			
-			String line = itr.next();
-			Complexity sizeComplexity = new SizeComplexity(line).GetComplexity();
-			memorizer.Memorize(line);
-			Complexity typeComplexity = new TypeOfComplexity(line).GetComplexity();
+			for(Line line: file.getLines()) {
 	%>
 
 	<tr>
-		<td> <%= lineCount %> </td>
+		<td> <%= line.getLineIndex() %> </td>
 		<td> <%= line %> </td>
-		<td> <%=sizeComplexity.keywordsToString()%> </td>
+		<td> <%= line.getSizeComplexity().keywordsToString() %> </td>
 		
 		<%
-			int TW = typeComplexity.getScore() + memorizer.GetNestingComplexity().getScore() + memorizer.GetInheritanceComplexity().getScore();
-			int Cps = sizeComplexity.getScore() * TW;
+			int TW = line.getRecursion().getScore();
+			int Cps = line.getSizeComplexity().getScore() * TW;
 		%>
 		
-		<td> <%= sizeComplexity.getScore() %> </td>
-		<td> <%= typeComplexity.getScore() %> </td>
-		<td> <%= memorizer.GetNestingComplexity().getScore() %> </td>
-		<td> <%= memorizer.GetInheritanceComplexity().getScore() %> </td>
+		<td> <%= line.getSizeComplexity().getScore() %> </td>
+		<td> <%= line.getNesting().getScore() %> </td>
 		<td> <%= TW %> </td>
 		<td> <%= Cps %> </td>
-		<td> <%= memorizer.GetRecursionComplexity().getScore() %> </td>
+		<td> <%= line.getRecursion().getScore() %> </td>
 	</tr>
 	
-	<% } %>
+	<% 
+			}
+		} 
+	%>
 </table>

@@ -6,8 +6,10 @@ import com.Controller.Complexity.TypeOfComplexity;
 public class Line {
 	private int lineIndex;
 	private String lineContent;
-	private SizeComplexity sizeComplexity;
-	private TypeOfComplexity typeOfComplexity;
+	private Complexity sizeComplexity;
+	private Complexity typeOfComplexity;
+	private Complexity recursion;
+	private Complexity nesting;
 	
 	public Line(int lineIndex, String lineContent) {
 		this.lineIndex = lineIndex;
@@ -28,6 +30,38 @@ public class Line {
 	
 	public void setLineContent(String lineContent) {
 		this.lineContent = lineContent;
+	}
+
+	public Complexity getRecursion() {
+		return recursion;
+	}
+
+	public void setRecursion(Complexity recursion) {
+		this.recursion = recursion;
+	}
+
+	public Complexity getNesting() {
+		return nesting;
+	}
+
+	public void setNesting(Complexity nesting) {
+		this.nesting = nesting;
+	}
+
+	public Complexity getSizeComplexity() {
+		return sizeComplexity;
+	}
+
+	public void setSizeComplexity(Complexity sizeComplexity) {
+		this.sizeComplexity = sizeComplexity;
+	}
+
+	public Complexity getTypeOfComplexity() {
+		return typeOfComplexity;
+	}
+
+	public void setTypeOfComplexity(Complexity typeOfComplexity) {
+		this.typeOfComplexity = typeOfComplexity;
 	}
 	
 	

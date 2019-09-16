@@ -99,7 +99,7 @@ public class Block {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("{type:"+type+", children: {");
+		StringBuilder str = new StringBuilder("{type:"+type+",start:"+start+",end:"+end+", children: {");
 		for (Block block : children) {
 			str.append(block.toString()+",");
 		}

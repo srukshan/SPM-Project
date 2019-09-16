@@ -20,7 +20,7 @@ public class Memorizer {
 		this.file = arrayList;
 		nestingLevel = new Block(0, "");
 		inheritanceLevel = new ArrayList<String>();
-		recursions = new Block(0, "");
+		recursions = new Block(0, file.size(), "");
 	}
 	
 	private void removeComments() {
@@ -225,6 +225,8 @@ public class Memorizer {
 	
 	public Complexity GetRecursionComplexity(Line line) {
 		Complexity complexity = new Complexity();
+		
+		System.out.println(recursions.toString());
 		
 		if(recursions.getLevels(new ArrayList<Block>(), line).size()>1) {
 			complexity.addScore(1);

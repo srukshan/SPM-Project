@@ -35,7 +35,7 @@ public class SizeComplexity extends AbstractComplexityFinder {
 		complexity.merge(new ManipulatorComplexity(line).GetComplexity());
 		complexity.merge(new MiscellaneousComplexity(line).GetComplexity());
 		complexity.merge(new NumericComplexity(line).GetComplexity());
-		complexity.merge(new RefAndDerefComplexity(line).GetComplexity());
+		//complexity.merge(new RefAndDerefComplexity(line).GetComplexity());
 		complexity.merge(new RelationComplexity(line).GetComplexity());
 		complexity.merge(new TextComplexity(line).GetComplexity());
 		complexity.merge(new VariableComplexity(line).GetComplexity());

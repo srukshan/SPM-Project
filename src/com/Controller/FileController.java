@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.Controller.Complexity.SizeComplexity;
+import com.Controller.Complexity.TypeOfComplexity;
 import com.Model.CodeFile;
 import com.Model.Line;
 
@@ -32,7 +34,7 @@ public class FileController {
 			e.printStackTrace();
 		}
 		
-		CommentController commentController = new CommentController(codeFile);
+		CommentController commentController = new CommentController(codeFile.getLines());
 		commentController.RemoveComments();
 		
 		return codeFile;
@@ -88,6 +90,22 @@ public class FileController {
 		}
 		
 		FileController.fileList = tempList;
+	}
+	
+	public static void startAnalyzing() {
+		Memorizer memorizer;
+		for(CodeFile item: fileList) {
+			//memorizer = new Memorizer(item.getLines());
+			//memorizer.checkFile();
+			
+			for(Line line: item.getLines()) {
+				//line.setRecursion(memorizer.GetRecursionComplexity(line));
+				//line.setNesting(memorizer.GetNestingComplexity(line));
+				
+				line.setSizeComplexity(new SizeComplexity(line.getLineContent()).GetComplexity());
+				//line.setTypeOfComplexity(new TypeOfComplexity(line.getLineContent()).GetComplexity());
+			}
+		}
 	}
 
 }

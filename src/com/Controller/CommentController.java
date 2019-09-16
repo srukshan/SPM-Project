@@ -14,37 +14,41 @@ public class CommentController {
 	
 	public void RemoveComments() {
 		boolean cmt = false;
+		boolean lncmt = false;
 		ArrayList<Line> oldContent = new ArrayList<Line>(file);
 		ArrayList<Line> newContent = new ArrayList<Line>();
 		
 		for(Line line: oldContent) {
 			char[] oldLine = line.getLineContent().toCharArray();
 			StringBuilder newLine = new StringBuilder();
-			
-			for(int i = 0; i < oldLine.length-1; i++) {
-				if(cmt) {
-					if(oldLine[i] == '*' && oldLine[i+1] == '/') {
-						cmt = false;
-						i++;
-					}
-					continue;
-				}else {
-					if(oldLine[i] == '/' && oldLine[i+1] == '/') {
-						break;
-					}
-					if(oldLine[i] == '/' && oldLine[i+1] == '*') {
-						cmt = true;
+			if(oldLine.length!=0) {
+				for(int i = 0; i < oldLine.length-1; i++) {
+					if(cmt) {
+						if(oldLine[i] == '*' && oldLine[i+1] == '/') {
+							cmt = false;
+							i++;
+						}
 						continue;
+					}else {
+						if(oldLine[i] == '/' && oldLine[i+1] == '/') {
+							lncmt = true;
+							break;
+						}
+						if(oldLine[i] == '/' && oldLine[i+1] == '*') {
+							cmt = true;
+							continue;
+						}
+						newLine.append(oldLine[i]);
 					}
-					newLine.append(oldLine[i]);
 				}
-			}
-			if(!cmt) {
-				newLine.append(oldLine[oldLine.length-1]);
-			}
-			if(newLine.length()!=0) {
-				line.setLineContent(newLine.toString());
-				newContent.add(line);
+				if(!cmt && !lncmt) {
+					newLine.append(oldLine[oldLine.length-1]);
+					lncmt = false;
+				}
+				if(newLine.length()!=0) {
+					line.setLineContent(newLine.toString());
+					newContent.add(line);
+				}
 			}
 		}
 		file = newContent;

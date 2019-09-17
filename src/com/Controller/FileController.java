@@ -95,8 +95,9 @@ public class FileController {
 	public static void startAnalyzing() {
 		Memorizer memorizer;
 		for(CodeFile item: fileList) {
-			//memorizer = new Memorizer(item.getLines());
-			//memorizer.checkFile();
+			System.out.println(item.getFileName());
+			memorizer = new Memorizer(item.getLines());
+			memorizer.checkFile();
 			
 			for(Line line: item.getLines()) {
 				//line.setRecursion(memorizer.GetRecursionComplexity(line));

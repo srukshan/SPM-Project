@@ -24,6 +24,12 @@ public class Block {
 		this.type = type;
 	}
 	
+	public Block(int start, String type, String name) {
+		this.start = start;
+		this.type = type;
+		this.name = name;
+	}
+	
 	public int getStart() {
 		return start;
 	}
@@ -105,6 +111,10 @@ public class Block {
 		}
 		str.append("}");
 		return str.toString();
+	}
+
+	public String getName() {
+		return name;
 	}
 	
 	

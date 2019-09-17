@@ -61,82 +61,79 @@ public class Memorizer {
 	public void checkFile() {
 		removeComments();
 		ArrayList<Line> lines = new ArrayList<Line>(file);
-		
 		int rstart = -1;
 		String rname = "";
 		boolean isRecursive = false;
-		boolean immutable = false;
 		
 		for (int i = 0; i < lines.size(); i++) {
-			Line current = removeQuotes(lines.get(i));
-			for(char c : current.getLineContent().toCharArray()) {
-				if(isBlockStart(c)) {
-					Line prev = i==0?null:removeQuotes(lines.get(i-1));
-					
-					ComplexityFinder complexity = new CustomComplexity(current.getLineContent(), new String[] {"if", "for", "while", "switch", "else", "class", "interface"});
-					
-					 ArrayList<String> type = complexity.GetComplexity().getKeywords();
-					 
-					 if(type.size()!=0) {
-						 nestingLevel.startChild(new Block(current.getLineIndex(),type.get(0)));
-						 break;
-					 }
-					 if(Pattern.compile("[a-zA-Z]+ [_a-zA-Z$]+[(]").matcher(current.getLineContent()).find()){
-						 complexity = new VariableComplexity(current.getLineContent());
-						 nestingLevel.startChild(new Block(current.getLineIndex(), "method"));
-						 rstart = current.getLineIndex();
-						 rname = complexity.GetComplexity().getKeywords().get(0);
-						 immutable = true;
-						 break;
-					 }
-					 
-					 complexity = new CustomComplexity(prev.getLineContent(), new String[] {"if", "for", "while", "switch", "else", "class", "interface"});
-						
-					 type = complexity.GetComplexity().getKeywords();
-					 
-					 if(type.size()!=0) {
-						 nestingLevel.startChild(new Block(current.getLineIndex(),type.get(0)));
-						 break;
-					 }
-					 
-					 if(prev.getLineContent().matches("[a-zA-Z]+ [_a-zA-Z$]+[(]")){
-						 complexity = new VariableComplexity(prev.getLineContent());
-						 nestingLevel.startChild(new Block(current.getLineIndex(), "method"));
-						 rstart = current.getLineIndex();
-						 rname = complexity.GetComplexity().getKeywords().get(0);
-						 immutable = true;
-						 break;
-					 }
-					 
-				}else if(isBlockEnd(c)) {
-					Block block = nestingLevel.endBlock(current.getLineIndex());
-					if(block.getStart()==rstart) {
-						if(isRecursive) {
-							recursions.addChild(new Block(rstart, current.getLineIndex()));
-							isRecursive = false;
-						}
-						rstart=-1;
-					}
-				}
+			Line current = removeBackSlashed(removeQuotes(lines.get(i)));
+			if(isBlockStart(current) && isBlockEnd(current)) {
+				
 			}
-			if(immutable) {
-				immutable = false;
-				continue;
-			}
-			if(rstart!=-1) {
-				ComplexityFinder complexity = new VariableComplexity(current.getLineContent());
-				for (String var : complexity.GetComplexity().getKeywords()) {
-					if(rname.equals(var)) {
-						isRecursive = true;
+			else if(isBlockStart(current)) {
+				
+				Line prev = i==0?null:removeQuotes(lines.get(i-1));
+				
+				ComplexityFinder complexity = new CustomComplexity(current.getLineContent(), new String[] {"if", "for", "while", "switch", "else", "class", "interface"});
+				
+				ArrayList<String> type = complexity.GetComplexity().getKeywords();
+				 
+				 if(type.size()!=0) {
+					 nestingLevel.startChild(new Block(current.getLineIndex(),type.get(0)));
+					 continue;
+				 }
+				 if(Pattern.compile("[a-zA-Z]+ [_a-zA-Z$]+[(]").matcher(current.getLineContent()).find()){
+					 complexity = new VariableComplexity(current.getLineContent());
+					 nestingLevel.startChild(new Block(current.getLineIndex(), "method"));
+					 rstart = current.getLineIndex();
+					 rname = complexity.GetComplexity().getKeywords().get(0);
+					 continue;
+				 }
+				 
+				 complexity = new CustomComplexity(prev.getLineContent(), new String[] {"if", "for", "while", "switch", "else", "class", "interface"});
+					
+				 type = complexity.GetComplexity().getKeywords();
+				 
+				 if(type.size()!=0) {
+					 nestingLevel.startChild(new Block(current.getLineIndex(),type.get(0)));
+					 continue;
+				 }
+				 
+				 if(prev.getLineContent().matches("[a-zA-Z]+ [_a-zA-Z$]+[(]")){
+					 complexity = new VariableComplexity(prev.getLineContent());
+					 nestingLevel.startChild(new Block(current.getLineIndex(), "method"));
+					 rstart = current.getLineIndex();
+					 rname = complexity.GetComplexity().getKeywords().get(0);
+					 continue;
+				 }
+				 
+			}else if(isBlockEnd(current)) {
+				Block block = nestingLevel.endBlock(current.getLineIndex());
+				if(block.getStart()==rstart) {
+					if(isRecursive) {
+						recursions.addChild(new Block(rstart, current.getLineIndex()));
+						isRecursive = false;
 					}
+					rstart=-1;
 				}
 			}
 			
+			if(rstart!=-1 && current.getLineContent().matches("[^.a-zA-Z]"+rname+"\\(")) {
+				isRecursive = true;
+			}
 		}
 		nestingLevel.endBlock(lines.size());
 		recursions.endBlock(lines.size());
+		System.out.println("Nesting : " + nestingLevel);
+		System.out.println("Recursion : " + recursions);
 	}
 	
+	private Line removeBackSlashed(Line line) {
+		String str = line.getLineContent().replaceAll("\\\\[^ ]", "");
+		line.setLineContent(str);
+		return line;
+	}
+
 	private boolean isNesting(Block block) {
 		for(String type: new String[] {"if", "for", "while", "switch", "else"}) {
 			if(block.getType().equals(type)) {
@@ -146,12 +143,12 @@ public class Memorizer {
 		return false;
 	}
 	
-	private boolean isBlockStart(char current) {
-		return current=='{';
+	private boolean isBlockStart(Line current) {
+		return current.getLineContent().contains("{");
 	}
 	
-	private boolean isBlockEnd(char current) {
-		return current=='}';
+	private boolean isBlockEnd(Line current) {
+		return current.getLineContent().contains("}");
 	}
 
 //	public void Memorize(String line) {

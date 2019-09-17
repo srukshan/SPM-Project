@@ -38,7 +38,7 @@
 					
 					<div class="form-actions">
 						<input type="hidden" name="action" id="action" value="readFile">
-						<button type="submit" class="btn btn-success btn-block btn-large"">Initialize</button>
+						<button type="submit" class="btn btn-success btn-block btn-large">Initialize</button>
 					</div>
 
 				</form>

@@ -3,9 +3,6 @@ package com.Controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,12 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import com.Controller.Complexity.Size.KeywordComplexity;
-import com.Interface.ComplexityFinder;
-import com.Model.CodeFile;
-import com.Model.Complexity;
 import com.Model.Line;
-import com.sun.swing.internal.plaf.metal.resources.metal;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MemorizerTest {

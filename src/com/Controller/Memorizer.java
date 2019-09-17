@@ -68,7 +68,7 @@ public class Memorizer {
 		for (int i = 0; i < lines.size(); i++) {
 			Line current = removeBackSlashed(removeQuotes(lines.get(i)));
 			if(isBlockStart(current) && isBlockEnd(current)) {
-				
+				// TODO: 
 			}
 			else if(isBlockStart(current)) {
 				
@@ -117,8 +117,8 @@ public class Memorizer {
 					rstart=-1;
 				}
 			}
-			
-			if(rstart!=-1 && current.getLineContent().matches("[^.a-zA-Z]"+rname+"\\(")) {
+			String crtln = current.getLineContent();
+			if(rstart!=-1 && Pattern.compile("[^.a-zA-Z]+"+rname+"[(]").matcher(crtln).find()) {
 				isRecursive = true;
 			}
 		}

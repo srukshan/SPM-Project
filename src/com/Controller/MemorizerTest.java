@@ -21,7 +21,7 @@ public class MemorizerTest {
 	public void preTesting() {
 		Line[] lines = new Line[] {
 				new Line(0, "import java.util.ArrayList;"),
-				new Line(1, "public class MemorizerTest {"),
+				new Line(1, "public class MemorizerTest extends Stand implements OnIt {"),
 				new Line(2, "	Memorizer memorizer;// {Hi"),
 				new Line(3, "	public void preTesting() {"),
 				new Line(4, "		for(String item: Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)) {"),
@@ -42,7 +42,7 @@ public class MemorizerTest {
 
 	@Test
 	public void testGetInheritanceComplexity() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(0,memorizer.GetInheritanceComplexity(new Line(2, "       	return preTesting();")).getScore());
 	}
 
 	@Test

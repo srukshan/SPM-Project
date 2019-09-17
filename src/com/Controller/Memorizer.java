@@ -67,7 +67,7 @@ public class Memorizer {
 		
 		for (int i = 0; i < lines.size(); i++) {
 			Line current = removeBackSlashed(removeQuotes(lines.get(i)));
-			if(isBlockStart(current) && isBlockEnd(current)) {
+			if(isMultiBracketed(current)) {
 				// TODO: 
 			}
 			else if(isBlockStart(current)) {
@@ -128,6 +128,19 @@ public class Memorizer {
 		System.out.println("Recursion : " + recursions);
 	}
 	
+	private boolean isMultiBracketed(Line current) {
+		boolean hasBracket = false;
+		for(char c : current.getLineContent().toCharArray()) {
+			if(c=='{' || c=='}') {
+				if(hasBracket)
+					return true;
+				else
+					hasBracket = true;
+			}
+		}
+		return false;
+	}
+
 	private Line removeBackSlashed(Line line) {
 		String str = line.getLineContent().replaceAll("\\\\[^ ]", "");
 		line.setLineContent(str);

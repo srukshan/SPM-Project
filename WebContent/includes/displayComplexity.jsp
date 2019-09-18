@@ -85,8 +85,12 @@
 									<td> <%= line.getLineIndex() %> </td>
 									<td> <%= line.getLineContent() %> </td>
 									<td> <%= line.getSizeComplexity().keywordsToString() %> </td>
-									
 									<td> <%= line.getSizeComplexity().getScore() %> </td>
+									<td>-</td>
+									<td> <%= line.getBracket()?"-":line.getNesting().getScore() %> </td>
+									<td> <%= line.getBracket()?"-":line.getInheritance().getScore() %> </td>
+									<td> <%= line.getBracket()?"-":line.getRecursion().getScore() %> </td>
+									
 								</tr>
 								
 <% 
@@ -139,6 +143,10 @@
 										<td> <%= line.getSizeComplexity().keywordsToString() %> </td>
 										
 										<td> <%= line.getSizeComplexity().getScore() %> </td>
+										<td>-</td>
+										<td> <%= line.getBracket()?"-":line.getNesting().getScore() %> </td>
+										<td> <%= line.getBracket()?"-":line.getInheritance().getScore() %> </td>
+										<td> <%= line.getBracket()?"-":line.getRecursion().getScore() %> </td>
 									</tr>
 									
 <% 

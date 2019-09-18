@@ -6,10 +6,12 @@ import com.Controller.Complexity.TypeOfComplexity;
 public class Line {
 	private int lineIndex;
 	private String lineContent;
-	private Complexity sizeComplexity;
-	private Complexity typeOfComplexity;
-	private Complexity recursion;
-	private Complexity nesting;
+	private Complexity sizeComplexity = new Complexity();
+	private Complexity typeOfComplexity = new Complexity();
+	private Complexity recursion = new Complexity();
+	private Complexity nesting = new Complexity();
+	private Complexity inheritance = new Complexity();
+	private boolean bracket = false;
 	
 	public Line(int lineIndex, String lineContent) {
 		this.lineIndex = lineIndex;
@@ -51,6 +53,10 @@ public class Line {
 	public Complexity getSizeComplexity() {
 		return sizeComplexity;
 	}
+	
+	public Complexity getInheritance() {
+		return inheritance;
+	}
 
 	public void setSizeComplexity(Complexity sizeComplexity) {
 		this.sizeComplexity = sizeComplexity;
@@ -63,6 +69,16 @@ public class Line {
 	public void setTypeOfComplexity(Complexity typeOfComplexity) {
 		this.typeOfComplexity = typeOfComplexity;
 	}
+
+	public void setInheritance(Complexity complexity) {
+		inheritance = complexity;
+	}
+
+	public void hasBrackets() {
+		bracket = true;
+	}
 	
-	
+	public boolean getBracket() {
+		return bracket;
+	}
 }

@@ -8,7 +8,6 @@ public class LowKeywordComplexity extends AbstractComplexityFinder{
 	public LowKeywordComplexity(String line) {
 		super(line);
 		this.wordList = new String[] {"new", "delete", "throw", "throws"};
-		removeDoubleQuotedString();
 	}
 
 	@Override

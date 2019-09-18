@@ -16,7 +16,7 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 		this.wordList = new String[] {};
 	}
 	
-	public void removeDoubleQuotedString() {
+	public String removeDoubleQuotedString() {
 		String temp = "";
 		int startQuote = -1;
 		int beginSub = 0;
@@ -55,7 +55,7 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 			}
 		}
 		
-		this.line = temp;
+		return temp;
 	}
 	
 	public boolean isVariable(String text) {
@@ -101,8 +101,9 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 	}
 	
 	public String[] getLineWords() {
+		String tempLine = removeDoubleQuotedString();
 		return Pattern.compile("[a-zA-Z$_][a-zA-Z$_0-9]*")
-				.matcher(line)
+				.matcher(tempLine)
 				.results()
 				.map(MatchResult::group)
 				.toArray(String[]::new);

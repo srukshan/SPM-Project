@@ -12,15 +12,16 @@ public class TextComplexity extends AbstractComplexityFinder {
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		String tempLine = removeDoubleQuotedString();
 		
 		int start = -1;
 		
-		for(int i = 0; i < line.length(); i++) {
-			if(line.charAt(i) == '"') {
+		for(int i = 0; i < tempLine.length(); i++) {
+			if(tempLine.charAt(i) == '"') {
 				if(start==-1)
 					start=i;
 				else {
-					complexity.addKeyword(line.substring(start, i+1));
+					complexity.addKeyword(tempLine.substring(start, i+1));
 					complexity.addScore(1);
 					start=-1;
 				}

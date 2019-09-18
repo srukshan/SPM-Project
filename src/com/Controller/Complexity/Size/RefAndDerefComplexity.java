@@ -12,33 +12,32 @@ public class RefAndDerefComplexity extends AbstractComplexityFinder{
 	
 	public RefAndDerefComplexity(String line) {
 		super(line);
-		wordList = new String[] {"&", "*"}; 
-		removeDoubleQuotedString();
+		wordList = new String[] {"&", "*"};
 	}
 
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
 		Pattern numberPattern = Pattern.compile("[0-9.]*$");
-		
+		String tempLine = removeDoubleQuotedString();
 		
 		for (String operator : wordList) {
 			
-			for(int i = 0; i < line.length() - operator.length(); i++) {
+			for(int i = 0; i < tempLine.length() - operator.length(); i++) {
 				
-				if(line.substring(i, i + operator.length()).equals(operator)) {
+				if(tempLine.substring(i, i + operator.length()).equals(operator)) {
 					if(i == 0) {
-						if(line.charAt(i + 1) != '=' && line.charAt(i + 1) != '*' && line.charAt(i + 1) != '&') {
+						if(tempLine.charAt(i + 1) != '=' && tempLine.charAt(i + 1) != '*' && tempLine.charAt(i + 1) != '&') {
 							complexity.addKeyword(operator);
 							complexity.addScore(1);
 						}
 					}
 					else if(i >= 1) {
 						if(operator.equals("*")) {
-							if(line.charAt(i - 1) != '=' && line.charAt(i - 1) != '*' &&
-									line.charAt(i + 1) != '=' && line.charAt(i + 1) != '*') 
+							if(tempLine.charAt(i - 1) != '=' && tempLine.charAt(i - 1) != '*' &&
+									tempLine.charAt(i + 1) != '=' && tempLine.charAt(i + 1) != '*') 
 							{
-								ArrayList<String> temp = new ArrayList<>(Arrays.asList(splitLine(line.substring(0, i))));
+								ArrayList<String> temp = new ArrayList<>(Arrays.asList(splitLine(tempLine.substring(0, i))));
 								
 								String lastToOperator = temp.get(temp.size() - 1);
 								
@@ -51,7 +50,7 @@ public class RefAndDerefComplexity extends AbstractComplexityFinder{
 							}
 						}
 						else {
-							if(line.charAt(i - 1) != '&' &&	line.charAt(i + 1) != '&') 
+							if(tempLine.charAt(i - 1) != '&' &&	tempLine.charAt(i + 1) != '&') 
 							{
 								complexity.addKeyword(operator);
 								complexity.addScore(1);

@@ -1,8 +1,5 @@
 package com.Model;
 
-import com.Controller.Complexity.SizeComplexity;
-import com.Controller.Complexity.TypeOfComplexity;
-
 public class Line {
 	private int lineIndex;
 	private String lineContent;
@@ -64,5 +61,45 @@ public class Line {
 		this.typeOfComplexity = typeOfComplexity;
 	}
 	
-	
+	public String removeDoubleQuotedString() {
+		String temp = "";
+		int startQuote = -1;
+		int beginSub = 0;
+		
+		for(int i = 0; i < lineContent.length(); ++i) {
+			if(i == 0) {
+				if(lineContent.charAt(i) == '"') {
+					if(startQuote == -1) {
+						startQuote = i;
+						
+						temp += lineContent.substring(beginSub, startQuote + 1);
+						
+					} else {
+						beginSub = i;
+						startQuote = -1;
+						
+					}
+				}
+			} else {
+				if(lineContent.charAt(i) == '"' && lineContent.charAt(i - 1) != '\\') {
+					if(startQuote == -1) {
+						startQuote = i;
+						
+						temp += lineContent.substring(beginSub, startQuote + 1);
+						
+					} else {
+						beginSub = i;
+						startQuote = -1;
+						
+					}
+				}
+			}
+			
+			if(i == lineContent.length() - 1) {
+				temp += lineContent.substring(beginSub, lineContent.length());
+			}
+		}
+		
+		return temp;
+	}
 }

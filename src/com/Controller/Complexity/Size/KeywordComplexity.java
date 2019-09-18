@@ -7,7 +7,6 @@ public class KeywordComplexity extends AbstractComplexityFinder {
 	
 	public KeywordComplexity(String line) {
 		super(line);
-		removeDoubleQuotedString();
 		wordList = new String[] { "alignas", 
 				"alignof", 
 				"and", 
@@ -117,13 +116,12 @@ public class KeywordComplexity extends AbstractComplexityFinder {
 	
 	public KeywordComplexity(String line, String[] wordList) {
 		super(line);
-		removeDoubleQuotedString();
 		this.wordList = wordList;
 	}
 
 	@Override
 	public Complexity GetComplexity() {
-		Complexity complexity = new Complexity();
+		Complexity complexity = new Complexity();		
 		
 		String[] checkWordList = getLineWords();
 		

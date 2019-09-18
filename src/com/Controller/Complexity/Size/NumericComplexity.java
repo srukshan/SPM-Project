@@ -17,22 +17,23 @@ public class NumericComplexity extends AbstractComplexityFinder {
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		String tempLine = removeDoubleQuotedString();
 		
 		int start = -1;
 		
-		for(int i = 0; i < line.length(); i++) {
-			if(line.charAt(i)=='"') {
+		for(int i = 0; i < tempLine.length(); i++) {
+			if(tempLine.charAt(i)=='"') {
 				if(start==-1)
 					start=i;
 				else {
-					line = line.replace(line.substring(start, i+1),"");
+					tempLine = tempLine.replace(tempLine.substring(start, i+1),"");
 					start=-1;
 				}
 			}
 		}
 		
 		ArrayList<String> numbers = new ArrayList<String>(Arrays.asList(Pattern.compile("\\b\\d+(?:\\.\\d+)?\\b")
-				.matcher(line)
+				.matcher(tempLine)
 				.results()
 				.map(MatchResult::group)
 				.toArray(String[]::new))

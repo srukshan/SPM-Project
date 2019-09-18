@@ -8,19 +8,19 @@ public class LogicalComplexity extends AbstractComplexityFinder {
 	public LogicalComplexity(String line) {
 		super(line);
 		wordList = new String[] { "&&", "||", "!" };
-		removeDoubleQuotedString();
 	}
 
 	@Override
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
+		String tempLine = removeDoubleQuotedString();
 		
 		for (String operator : wordList) {
 			
-			for(int i = 0; i < line.length() - operator.length(); i++) {
+			for(int i = 0; i < tempLine.length() - operator.length(); i++) {
 				
-				if(line.substring(i, i + operator.length()).equals(operator)) {
-					if(operator.equals("!") && (i == 0 || line.charAt(i - 1) != '=') && line.charAt(i + 1) != '=') {
+				if(tempLine.substring(i, i + operator.length()).equals(operator)) {
+					if(operator.equals("!") && (i == 0 || tempLine.charAt(i - 1) != '=') && tempLine.charAt(i + 1) != '=') {
 						complexity.addKeyword(operator);
 						complexity.addScore(1);
 					}

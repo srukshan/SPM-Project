@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import com.Controller.Complexity.SizeComplexity;
-import com.Controller.Complexity.TypeOfComplexity;
 import com.Model.CodeFile;
 import com.Model.Line;
 
@@ -96,7 +95,7 @@ public class FileController {
 		Memorizer memorizer;
 		for(CodeFile item: fileList) {
 			System.out.println(item.getFileName());
-			//memorizer = new Memorizer(item.getLines());
+			memorizer = new Memorizer(item.getLines());
 			//memorizer.checkFile();
 			
 			for(Line line: item.getLines()) {

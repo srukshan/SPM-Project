@@ -1,12 +1,16 @@
 package com.Controller.Complexity.TypeOf;
 
+import java.util.ArrayList;
+
 import com.Interface.AbstractComplexityFinder;
 import com.Model.Complexity;
+import com.Model.Line;
 
-public class IfConditionComplexity extends AbstractComplexityFinder{
+public class IfConditionComplexity {
+	private ArrayList<Line> file;
 
-	public IfConditionComplexity(String line) {
-		super(line);
+	public IfConditionComplexity(ArrayList<Line> file) {
+		this.file = file;
 	}
 
 	public Complexity GetComplexity() {

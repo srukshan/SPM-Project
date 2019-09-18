@@ -4,5 +4,5 @@ import com.Model.Complexity;
 
 public interface ComplexityFinder {
 	public Complexity GetComplexity();
-	public void removeDoubleQuotedString();
+	public String removeDoubleQuotedString();
 }

@@ -17,10 +17,10 @@ public class TypeOfComplexity extends AbstractComplexityFinder {
 	public Complexity GetComplexity() {
 		Complexity complexity = new Complexity();
 
-		complexity.merge(new IfConditionComplexity(line).GetComplexity());
-		complexity.merge(new IterativeComplexity(line).GetComplexity());
+		//complexity.merge(new IfConditionComplexity(line).GetComplexity());
+		//complexity.merge(new IterativeComplexity(line).GetComplexity());
 		complexity.merge(new CatchComplexity(line).GetComplexity());
-		complexity.merge(new SwitchComplexity(line).GetComplexity());
+		//complexity.merge(new SwitchComplexity(line).GetComplexity());
 		
 		return complexity;
 	}

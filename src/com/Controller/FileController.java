@@ -102,13 +102,13 @@ public class FileController {
 			for(Line line: item.getLines()) {
 				System.out.println(line.getLineIndex());
 				if(line.getLineContent().contains("{") || line.getLineContent().contains("}")) {
-					line.hasBrackets();
+					line.hasBracket();
 				}
 				line.setRecursion(memorizer.GetRecursionComplexity(line));
 				line.setNesting(memorizer.GetNestingComplexity(line));
 				line.setInheritance(memorizer.GetInheritanceComplexity(line));
 				line.setSizeComplexity(new SizeComplexity(line.getLineContent()).GetComplexity());
-				//line.setTypeOfComplexity(new TypeOfComplexity(line.getLineContent()).GetComplexity());
+				line.setTypeOfComplexity(new TypeOfComplexity(line.getLineContent()).GetComplexity());
 			}
 		}
 	}

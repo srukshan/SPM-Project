@@ -11,7 +11,7 @@ public class IterativeComplexityTest {
 
 	@Test
 	public void test() {
-		ComplexityFinder complexityFinder = new IterativeComplexity("   do(a+b==\"hello\"&&d-c==2);");
+		ComplexityFinder complexityFinder = new ConditionComplexity("   do(a+b==\"hello\"&&d-c==2);");
 		Complexity complexity = complexityFinder.GetComplexity();
 		assertEquals("do, &&", complexity.keywordsToString());
 		assertEquals(3, complexity.getScore());

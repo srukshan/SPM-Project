@@ -7,7 +7,7 @@ public class CatchComplexity extends AbstractComplexityFinder{
 
 	public CatchComplexity(String line) {
 		super(line);
-		this.wordList = new String[] {"catch", "if", "while", "do", "for"};
+		this.wordList = new String[] {"catch", "for", "switch"};
 	}
 
 	@Override
@@ -19,13 +19,14 @@ public class CatchComplexity extends AbstractComplexityFinder{
 		for(String item: wordList) {
 
 			for(String key: checkLine) {
-				
-				if(item.equals("if") || item.equals("catch")) {
-					complexity.addKeyword(item);
-					complexity.addScore(1);
-				} else {
-					complexity.addKeyword(item);
-					complexity.addScore(2);
+				if(key.equals(item)) {
+					if(key.equals("catch")) {
+						complexity.addKeyword(key);
+						complexity.addScore(1);
+					} else {
+						complexity.addKeyword(key);
+						complexity.addScore(2);
+					}
 				}
 			}
 		}

@@ -3,14 +3,20 @@ package com.Model;
 public class Line {
 	private int lineIndex;
 	private String lineContent;
-	private Complexity sizeComplexity;
-	private Complexity typeOfComplexity;
-	private Complexity recursion;
-	private Complexity nesting;
+	private Complexity sizeComplexity = new Complexity();
+	private Complexity typeOfComplexity = new Complexity();
+	private Complexity recursion = new Complexity();
+	private Complexity nesting = new Complexity();
+	private Complexity inheritance = new Complexity();
+	private boolean bracket = false;
 	
 	public Line(int lineIndex, String lineContent) {
 		this.lineIndex = lineIndex;
 		this.lineContent = lineContent;
+	}
+	
+	public void hasBracket() {
+		bracket = true;
 	}
 	
 	public int getLineIndex() {
@@ -101,5 +107,17 @@ public class Line {
 		}
 		
 		return temp;
+	}
+
+	public Complexity getInheritance() {
+		return inheritance;
+	}
+
+	public void setInheritance(Complexity inheritance) {
+		this.inheritance = inheritance;
+	}
+
+	public boolean getBracket() {
+		return bracket;
 	}
 }

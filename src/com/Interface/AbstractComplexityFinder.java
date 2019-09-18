@@ -22,18 +22,34 @@ public abstract class AbstractComplexityFinder implements ComplexityFinder {
 		int beginSub = 0;
 		
 		for(int i = 0; i < line.length(); ++i) {
-			if(line.charAt(i) == '"' && line.charAt(i - 1) != '\\') {
-				if(startQuote == -1) {
-					startQuote = i;
-					
-					temp += line.substring(beginSub, startQuote + 1);
-					
-				} else {
-					beginSub = i;
-					startQuote = -1;
-					
+			if(i == 0) {
+				if(line.charAt(i) == '"') {
+					if(startQuote == -1) {
+						startQuote = i;
+						
+						temp += line.substring(beginSub, startQuote + 1);
+						
+					} else {
+						beginSub = i;
+						startQuote = -1;
+						
+					}
+				}
+			} else {
+				if(line.charAt(i) == '"' && line.charAt(i - 1) != '\\') {
+					if(startQuote == -1) {
+						startQuote = i;
+						
+						temp += line.substring(beginSub, startQuote + 1);
+						
+					} else {
+						beginSub = i;
+						startQuote = -1;
+						
+					}
 				}
 			}
+			
 			if(i == line.length() - 1) {
 				temp += line.substring(beginSub, line.length());
 			}

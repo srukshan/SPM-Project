@@ -17,7 +17,7 @@ public class ManipulatorComplexity extends AbstractComplexityFinder {
 		
 		for (String operator : wordList) {
 			
-			for(int i = 0; i < line.length() - operator.length() + 1; i++) {
+			for(int i = 0; i < line.length() - operator.length(); i++) {
 				
 				if(line.substring(i, i + operator.length()).equals(operator)) {
 					complexity.addKeyword(operator);

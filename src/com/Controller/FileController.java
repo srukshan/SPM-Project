@@ -96,10 +96,11 @@ public class FileController {
 		Memorizer memorizer;
 		for(CodeFile item: fileList) {
 			System.out.println(item.getFileName());
-			memorizer = new Memorizer(item.getLines());
-			memorizer.checkFile();
+			//memorizer = new Memorizer(item.getLines());
+			//memorizer.checkFile();
 			
 			for(Line line: item.getLines()) {
+				System.out.println(line.getLineIndex());
 				//line.setRecursion(memorizer.GetRecursionComplexity(line));
 				//line.setNesting(memorizer.GetNestingComplexity(line));
 				

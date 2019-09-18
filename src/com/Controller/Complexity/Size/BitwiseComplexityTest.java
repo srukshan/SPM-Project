@@ -10,10 +10,10 @@ public class BitwiseComplexityTest {
 
 	@Test
 	public void testGetComplexity() {
-		ComplexityFinder complexityFinder = new BitwiseComplexity("   if(a<<b==4 &&d |c==2){");
+		ComplexityFinder complexityFinder = new BitwiseComplexity("				if(item.getCanonicalPath().toLowerCase().endsWith(\".java\") ||");
 		Complexity complexity = complexityFinder.GetComplexity();
-		assertEquals("|, <<", complexity.keywordsToString());
-		assertEquals(2, complexity.getScore());
+		assertEquals("", complexity.keywordsToString());
+		assertEquals(0, complexity.getScore());
 	}
 
 }

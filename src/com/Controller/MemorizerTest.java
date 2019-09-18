@@ -3,9 +3,6 @@ package com.Controller;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -14,12 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
-import com.Controller.Complexity.Size.KeywordComplexity;
-import com.Interface.ComplexityFinder;
-import com.Model.CodeFile;
-import com.Model.Complexity;
 import com.Model.Line;
-import com.sun.swing.internal.plaf.metal.resources.metal;
 
 @TestInstance(Lifecycle.PER_CLASS)
 public class MemorizerTest {
@@ -29,7 +21,7 @@ public class MemorizerTest {
 	public void preTesting() {
 		Line[] lines = new Line[] {
 				new Line(0, "import java.util.ArrayList;"),
-				new Line(1, "public class MemorizerTest {"),
+				new Line(1, "public class MemorizerTest extends Stand implements OnIt {"),
 				new Line(2, "	Memorizer memorizer;// {Hi"),
 				new Line(3, "	public void preTesting() {"),
 				new Line(4, "		for(String item: Files.readAllLines(Paths.get(filePath), StandardCharsets.UTF_8)) {"),
@@ -50,7 +42,7 @@ public class MemorizerTest {
 
 	@Test
 	public void testGetInheritanceComplexity() {
-		fail("Not yet implemented"); // TODO
+		assertEquals(0,memorizer.GetInheritanceComplexity(new Line(2, "       	return preTesting();")).getScore());
 	}
 
 	@Test

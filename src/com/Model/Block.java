@@ -88,6 +88,14 @@ public class Block {
 		children.add(child);
 	}
 	
+	public ArrayList<Block> getLevels(Line line){
+		return getLevels(new ArrayList<Block>(), line);
+	}
+	
+	public ArrayList<Block> getLevels(int line){
+		return getLevels(new ArrayList<Block>(), new Line(line, ""));
+	}
+	
 	public ArrayList<Block> getLevels(ArrayList<Block> blocks, Line line){
 		if((this.start<line.getLineIndex()) && (line.getLineIndex()<this.end)) {
 			blocks.add(this);
@@ -101,6 +109,10 @@ public class Block {
 			return blocks;
 		}else
 			return null;
+	}
+
+	public ArrayList<Block> getChildren() {
+		return children;
 	}
 
 	@Override

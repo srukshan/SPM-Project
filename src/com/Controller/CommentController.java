@@ -19,6 +19,7 @@ public class CommentController {
 		ArrayList<Line> newContent = new ArrayList<Line>();
 		
 		for(Line line: oldContent) {
+			lncmt = false;
 			char[] oldLine = line.getLineContent().toCharArray();
 			StringBuilder newLine = new StringBuilder();
 			if(oldLine.length!=0) {

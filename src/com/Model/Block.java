@@ -89,26 +89,18 @@ public class Block {
 	}
 	
 	public ArrayList<Block> getLevels(Line line){
-		return getLevels(new ArrayList<Block>(), line);
-	}
-	
-	public ArrayList<Block> getLevels(int line){
-		return getLevels(new ArrayList<Block>(), new Line(line, ""));
-	}
-	
-	public ArrayList<Block> getLevels(ArrayList<Block> blocks, Line line){
+		ArrayList<Block> blocks = new ArrayList<Block>();
 		if((this.start<line.getLineIndex()) && (line.getLineIndex()<this.end)) {
 			blocks.add(this);
 			for(Block child: this.children) {
-				ArrayList<Block> newBlocks = child.getLevels(blocks, line);
+				ArrayList<Block> newBlocks = child.getLevels(line);
 				if(newBlocks != null) {
-					blocks = newBlocks;
+					blocks.addAll(newBlocks);
 					break;
 				}
 			}
-			return blocks;
-		}else
-			return null;
+		}else return null;
+		return blocks;
 	}
 
 	public ArrayList<Block> getChildren() {

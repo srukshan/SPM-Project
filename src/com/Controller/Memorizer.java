@@ -100,11 +100,11 @@ public class Memorizer {
 					 continue;
 				 }
 				 
-				 if(prev.getLineContent().matches("[a-zA-Z]+ [_a-zA-Z$]+[(]")){
+				 if(prev.getLineContent().matches("[a-zA-Z>]+ [_a-zA-Z$]+[(]")){
 					 complexity = new VariableComplexity(prev.getLineContent());
 					 nestingLevel.startChild(new Block(current.getLineIndex(), "method"));
 					 rstart = current.getLineIndex();
-					 Matcher match = Pattern.compile("[a-zA-Z]+ ([_a-zA-Z$]+)[(]").matcher(prev.getLineContent()); 
+					 Matcher match = Pattern.compile("[a-zA-Z>]+ ([_a-zA-Z$]+)[(]").matcher(prev.getLineContent()); 
 					 match.find();
 					 rname = match.group(1);
 					 continue;
@@ -159,21 +159,23 @@ public class Memorizer {
 		return false;
 	}
 	
-	private boolean isBlockStart(Line current) {
+	public boolean isBlockStart(Line current) {
 		return current.getLineContent().contains("{");
 	}
 	
-	private boolean isBlockEnd(Line current) {
+	public boolean isBlockEnd(Line current) {
 		return current.getLineContent().contains("}");
 	}
 
 	public Complexity GetNestingComplexity(Line line) {
 		Complexity complexity = new Complexity();
-		
-		for(Block block : nestingLevel.getLevels(new ArrayList<Block>(), line)) {
-			if(isNesting(block)) {
-				complexity.addKeyword(block.getType());
-				complexity.addScore(1);
+		ArrayList<Block> blocks = nestingLevel.getLevels(line);
+		if(blocks!=null) {
+			for(Block block : blocks) {
+				if(isNesting(block)) {
+					complexity.addKeyword(block.getType());
+					complexity.addScore(1);
+				}
 			}
 		}
 		
@@ -221,9 +223,11 @@ public class Memorizer {
 	private int classStart(Line line) {
 		ArrayList<Block> blocks = nestingLevel.getLevels(line);
 		
-		for (Block block : blocks) {
-			if(block.getType().equals("class"))
-				return block.getStart();
+		if(blocks != null) {
+			for (Block block : blocks) {
+				if(block.getType().equals("class"))
+					return block.getStart();
+			}
 		}
 		
 		return -1;
@@ -232,7 +236,9 @@ public class Memorizer {
 	public Complexity GetRecursionComplexity(Line line) {
 		Complexity complexity = new Complexity();
 		
-		if(recursions.getLevels(new ArrayList<Block>(), line).size()>1) {
+		ArrayList<Block> blocks = recursions.getLevels(line);
+		
+		if(blocks!=null && blocks.size()>1) {
 			complexity.addScore(1);
 		}
 		

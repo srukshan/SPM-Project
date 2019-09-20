@@ -79,6 +79,9 @@
 								
 <%										
 								for(Line line: FileController.GetFileList().get(i).getLines()) {
+									
+									int TW= line.getTypeOfComplexity().getScore() +line.getNesting().getScore() +line.getInheritance().getScore();
+									int Cps = line.getSizeComplexity().getScore() * TW;
 %>
 							
 								<tr>
@@ -89,6 +92,8 @@
 									<td> <%= line.getTypeOfComplexity().getScore() %> </td>
 									<td> <%= line.getBracket()?"-":line.getNesting().getScore() %> </td>
 									<td> <%= line.getBracket()?"-":line.getInheritance().getScore() %> </td>
+									<td> <%= TW %> </td>
+										<td> <%= Cps %> </td>
 									<td> <%= line.getBracket()?"-":line.getRecursion().getScore() %> </td>
 									
 								</tr>
@@ -135,6 +140,11 @@
 									
 <%										
 									for(Line line: FileController.GetFileList().get(i).getLines()) {
+										
+										
+										int TW= line.getTypeOfComplexity().getScore() +line.getNesting().getScore() +line.getInheritance().getScore();
+										int Cps = line.getSizeComplexity().getScore() * TW;
+									
 %>
 								
 									<tr>
@@ -146,6 +156,8 @@
 										<td> <%= line.getTypeOfComplexity().getScore() %> </td>
 										<td> <%= line.getBracket()?"-":line.getNesting().getScore() %> </td>
 										<td> <%= line.getBracket()?"-":line.getInheritance().getScore() %> </td>
+										<td> <%= TW %> </td>
+										<td> <%= Cps %> </td>
 										<td> <%= line.getBracket()?"-":line.getRecursion().getScore() %> </td>
 									</tr>
 									

@@ -22,7 +22,7 @@ public class LowKeywordComplexity extends AbstractComplexityFinder{
 				
 				if(item.equals(key)) {
 					complexity.addKeyword(item);
-					complexity.addScore(1);
+					complexity.addScore(2);
 				}
 			}
 		}
